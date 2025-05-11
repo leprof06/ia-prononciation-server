@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: IA Prononciation API
+  version: 1.0.0
+
+paths:
+  /analyse-prononciation:
+    post:
+      summary: Analyse la prononciation d'un fichier audio
+      operationId: analysePrononciation
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                fichier:
+                  type: string
+                  format: binary
+                  description: Fichier audio à analyser (.wav, .mp3)
+                texte_cible:
+                  type: string
+                  description: Phrase attendue
+                moteur:
+                  type: string
+                  enum: [whisper, vosk, auto]
+                  description: Moteur à utiliser (auto par défaut)
+      responses:
+        '200':
+          description: Résultat de l'analyse de prononciation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  moteur_utilise:
+                    type: string
+                  langue_detectee:
+                    type: string
+                  transcription:
+                    type: string
+                  attendu:
+                    type: string
+                  score:
+                    type: number
+                  erreurs:
+                    type: array
+                    items:
+                      type: string
+                  message:
+                    type: string
