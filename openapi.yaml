@@ -3,6 +3,10 @@ info:
   title: IA Prononciation API
   version: 1.0.0
 
+servers:
+  - url: https://ia-prononciation-server.onrender.com
+    description: Serveur de production hébergé sur Render
+
 paths:
   /analyse-prononciation:
     post:
