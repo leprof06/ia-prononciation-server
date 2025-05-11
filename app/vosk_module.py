@@ -2,21 +2,32 @@ import os
 import wave
 from vosk import Model, KaldiRecognizer
 import json
+from app.download_models import vosk_models, download_and_extract
 
 # Préparer les modèles pour différentes langues si besoin
 def get_vosk_model(language_code: str):
-    model_paths = {
-        "en": "models/vosk-en",
-        "fr": "models/vosk-fr",
-        "de": "models/vosk-de",
-        "es": "models/vosk-es",
-        "ru": "models/vosk-ru",
-    }
-    model_path = model_paths.get(language_code, "models/vosk-en")
+    model_path = os.path.join("models", f"vosk-{language_code}")
+
     if not os.path.exists(model_path):
-        raise RuntimeError(f"Modèle Vosk non trouvé pour {language_code}.")
+        print(f"Modèle manquant pour {language_code}, téléchargement en cours...")
+        url = vosk_models.get(language_code)
+        if url:
+            download_and_extract(language_code, url)
+        else:
+            raise RuntimeError(f"Aucun modèle disponible pour la langue '{language_code}'")
+
     return Model(model_path)
 
+# Précharger un modèle sans transcription (utilisé à l'annonce de la langue)
+def prepare_vosk_model(language_code: str):
+    model_path = os.path.join("models", f"vosk-{language_code}")
+    if not os.path.exists(model_path):
+        print(f"Préchargement du modèle Vosk pour {language_code}")
+        url = vosk_models.get(language_code)
+        if url:
+            download_and_extract(language_code, url)
+
+# Transcription vocale avec Vosk
 def transcribe_with_vosk(audio_path: str, language_code: str) -> str:
     model = get_vosk_model(language_code)
     wf = wave.open(audio_path, "rb")

@@ -2,16 +2,16 @@ import os
 import urllib.request
 import zipfile
 
-# Dictionnaire des modèles Vosk à télécharger
+# Dictionnaire des modèles Vosk disponibles (Dropbox)
 vosk_models = {
-    "fr": "https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip",
-    "en": "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip",
-    "de": "https://alphacephei.com/vosk/models/vosk-model-small-de-0.15.zip",
-    "es": "https://alphacephei.com/vosk/models/vosk-model-small-es-0.42.zip",
-    "ru": "https://alphacephei.com/vosk/models/vosk-model-small-ru-0.22.zip",
-    "ja": "https://alphacephei.com/vosk/models/vosk-model-small-ja-0.22.zip",
-    "zh": "https://alphacephei.com/vosk/models/vosk-model-small-cn-0.22.zip",
-    "ko": "https://alphacephei.com/vosk/models/vosk-model-small-ko-0.22.zip"
+    "cn": "https://www.dropbox.com/scl/fo/rjlas5gsop3ri9fj7ks0j/AJapDKFGxn-ZSB1vY2iP03k?rlkey=qa1uxx66ygkid85cbb0x782k8&st=ognq7vks&dl=1",
+    "de": "https://www.dropbox.com/scl/fo/ofeesbrge29rpvcvxfm7i/AAtPiQewzmEAYQdXfddRrP8?rlkey=2fw54bx2mnnap1vjdpzllei2u&st=x4wx1zpm&dl=1",
+    "en": "https://www.dropbox.com/scl/fo/f5n07mz2hco1scttgfz0v/AHp8lXdjyIvNCJK8QebEj88?rlkey=s1o2u9kxmiahfonwldjccdf2b&st=ysbmmvvf&dl=1",
+    "es": "https://www.dropbox.com/scl/fo/vt86v45410a0gjo6rp13a/ADDRFYDId7_Rv19msR4xR00?rlkey=xm864h3d26rekg4m8jhv7jpl5&st=k6swut0i&dl=1",
+    "fr": "https://www.dropbox.com/scl/fo/2feawxd2cxtltxr0td6nl/AFySa7zld62ggdq57GWenkk?rlkey=owlt6tyvyxv97jb45b2iw3o6n&st=kgdnns8o&dl=1",
+    "ja": "https://www.dropbox.com/scl/fo/tktlwae3xzkj3icv4geki/AKgOzLAFd8YMIfdje3Py5_Q?rlkey=nftnwh5a3f05zka4vu7nyp0on&st=icfcc5pf&dl=1",
+    "ko": "https://www.dropbox.com/scl/fo/76j3io9bbv9hjhuqi6vg4/AAMWSxjGEcO-K9dNPbinEy0?rlkey=j75wdvq9az4c7ok72pxrangfv&st=zet8ahf3&dl=1",
+    "ru": "https://www.dropbox.com/scl/fo/8re3j5rty71ehmrux4dq3/ADCk7x9SVIwoO0ZxZf2c438?rlkey=ypu4ohejdygfzeei06oxjyw6q&st=805pqi2x&dl=1"
 }
 
 models_dir = "models"
@@ -29,15 +29,7 @@ def download_and_extract(lang_code, url):
 
     print(f"Décompression du modèle {lang_code}...")
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(models_dir)
+        zip_ref.extractall(dest_folder)
 
-    # Renommer le dossier extrait
-    extracted_dir = [d for d in os.listdir(models_dir) if d.startswith("vosk-model") and os.path.isdir(os.path.join(models_dir, d))][-1]
-    os.rename(os.path.join(models_dir, extracted_dir), dest_folder)
     os.remove(zip_path)
     print(f"Modèle {lang_code} prêt.")
-
-for code, url in vosk_models.items():
-    download_and_extract(code, url)
-
-print("✅ Tous les modèles nécessaires sont prêts.")

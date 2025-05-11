@@ -54,3 +54,28 @@ paths:
                       type: string
                   message:
                     type: string
+
+  /prepare-modele:
+    post:
+      summary: Préparer un modèle de reconnaissance vocale Vosk pour une langue donnée
+      operationId: preparerModele
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                langue:
+                  type: string
+                  description: Code de la langue à préparer (ex: 'de', 'fr', 'ko')
+      responses:
+        '200':
+          description: Message de confirmation du modèle téléchargé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
