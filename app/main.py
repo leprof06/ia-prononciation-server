@@ -19,21 +19,18 @@ class AnalyseResult(BaseModel):
 @app.post("/analyse-prononciation", response_model=AnalyseResult)
 async def analyse_prononciation(
     fichier: UploadFile = File(...),
-    texte_cible: str = Form(...),
+    texte_cible: str = Form(...)
 ):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
         tmp.write(await fichier.read())
         audio_path = tmp.name
 
     langue_detectee = detect_language(texte_cible)
-
     transcription = transcribe_with_whisper(audio_path)
-    moteur_utilise = "whisper"
-
     score, erreurs, message = compare_texts(transcription, texte_cible)
 
     return AnalyseResult(
-        moteur_utilise=moteur_utilise,
+        moteur_utilise="whisper",
         langue_detectee=langue_detectee,
         transcription=transcription,
         attendu=texte_cible,
