@@ -20,6 +20,6 @@ uvicorn app.main:app --reload
 **POST** `/analyse-prononciation`
 - `fichier` : fichier audio (.wav, .mp3)
 - `texte_cible` : texte attendu
-- `moteur` : `whisper`, `vosk` ou `auto`
+- `moteur` : `whisper`
 
 
