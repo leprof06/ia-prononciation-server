@@ -4,7 +4,7 @@ Un serveur FastAPI permettant d'analyser la prononciation d'un enregistrement au
 
 ## Fonctionnalités
 - Détection automatique de la langue (via `langdetect`)
-- Transcription avec Whisper
+- Transcription avec Whisper 
 - Comparaison de la transcription avec la phrase attendue
 - Calcul d'un score de prononciation et retour pédagogique
 
@@ -21,3 +21,5 @@ uvicorn app.main:app --reload
 - `fichier` : fichier audio (.wav, .mp3)
 - `texte_cible` : texte attendu
 - `moteur` : `whisper`
+
+
