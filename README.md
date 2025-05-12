@@ -4,7 +4,7 @@ Un serveur FastAPI permettant d'analyser la prononciation d'un enregistrement au
 
 ## Fonctionnalités
 - Détection automatique de la langue (via `langdetect`)
-- Transcription avec Whisper ou Vosk
+- Transcription avec Whisper 
 - Comparaison de la transcription avec la phrase attendue
 - Calcul d'un score de prononciation et retour pédagogique
 
@@ -22,14 +22,4 @@ uvicorn app.main:app --reload
 - `texte_cible` : texte attendu
 - `moteur` : `whisper`, `vosk` ou `auto`
 
-## Dossiers de modèles Vosk
-Créer un dossier `models/` contenant les sous-dossiers :
-- `vosk-en/` ← depuis `vosk-model-small-en-us-0.15`
-- `vosk-fr/` ← depuis `vosk-model-small-fr-0.22`
-- `vosk-de/` ← depuis `vosk-model-small-de-0.15`
-- `vosk-es/` ← depuis `vosk-model-small-es-0.42`
-- `vosk-ru/` ← depuis `vosk-model-small-ru-0.22`
 
-👉 Utilise uniquement les modèles **-small** pour de meilleures performances en hébergement et un chargement plus rapide.
-
-Tu peux les télécharger ici : [https://alphacephei.com/vosk/models](https://alphacephei.com/vosk/models)
