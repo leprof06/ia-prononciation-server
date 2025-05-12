@@ -2,6 +2,7 @@ openapi: 3.1.0
 info:
   title: IA Prononciation API
   version: 1.0.0
+  description: API d’analyse de prononciation basée sur Whisper
 
 servers:
   - url: https://ia-prononciation-server.onrender.com
@@ -10,7 +11,7 @@ servers:
 paths:
   /analyse-prononciation:
     post:
-      summary: Analyse la prononciation d'un fichier audio
+      summary: Analyse la prononciation d’un fichier audio
       operationId: analysePrononciation
       requestBody:
         required: true
@@ -25,10 +26,10 @@ paths:
                   description: Fichier audio à analyser (.wav, .mp3)
                 texte_cible:
                   type: string
-                  description: Phrase attendue
+                  description: Phrase attendue pour comparaison
       responses:
         '200':
-          description: Résultat de l'analyse de prononciation
+          description: Résultat de l’analyse de prononciation
           content:
             application/json:
               schema:
@@ -44,6 +45,7 @@ paths:
                     type: string
                   score:
                     type: number
+                    format: float
                   erreurs:
                     type: array
                     items:
