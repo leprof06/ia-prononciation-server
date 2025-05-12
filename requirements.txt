@@ -11,4 +11,4 @@ gTTS
 git+https://github.com/openai/whisper.git
 
 # Torch compatible CPU (important !)
-torch==2.0.1+cpu --index-url https://download.pytorch.org/whl/cpu
+torch>=2.0.0,<2.8.0
