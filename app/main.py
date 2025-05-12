@@ -20,7 +20,6 @@ class AnalyseResult(BaseModel):
 async def analyse_prononciation(
     fichier: UploadFile = File(...),
     texte_cible: str = Form(...),
-    moteur: str = Form("auto")
 ):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp:
         tmp.write(await fichier.read())
