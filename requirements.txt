@@ -1,14 +1,14 @@
---prefer-binary
-
+# Serveur FastAPI + dépendances backend
 fastapi
 uvicorn
 pydantic
 python-multipart
 langdetect
 python-Levenshtein
+gTTS
 
-# Whisper (CPU-only)
+# Whisper (version CPU uniquement)
 git+https://github.com/openai/whisper.git
 
-# Torch CPU version (légère)
-torch>=2.0.0,<2.8.0
+# Torch compatible CPU (important !)
+torch==2.0.1+cpu --index-url https://download.pytorch.org/whl/cpu
