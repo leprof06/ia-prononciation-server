@@ -3,6 +3,5 @@ uvicorn
 pydantic
 python-multipart
 git+https://github.com/openai/whisper.git
-vosk
 levenshtein
 langdetect
