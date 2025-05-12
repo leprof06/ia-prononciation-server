@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test API Prononciation</title>
+</head>
+<body>
+  <h2>Test de l'API IA Prononciation</h2>
+  <form id="formulaire">
+    <label>Fichier audio (.wav ou .mp3) :</label><br>
+    <input type="file" name="fichier" accept=".wav,.mp3" required><br><br>
+
+    <label>Texte attendu :</label><br>
+    <input type="text" name="texte_cible" required><br><br>
+
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <h3>Résultat :</h3>
+  <pre id="resultat"></pre>
+
+  <script>
+    document.getElementById('formulaire').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      const response = await fetch('https://ia-prononciation-server.onrender.com/analyse-prononciation', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      document.getElementById('resultat').textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>
